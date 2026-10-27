@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ujian BAB 1 - Pendidikan Agama Katolik Kelas II</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font: Fredoka & Quicksand untuk nuansa 3D Ceria Pixar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              sky: '#38BDF8',
+              sun: '#FBBF24',
+              coral: '#FB7185',
+              grass: '#34D399',
+              indigo: '#6366F1',
+              cream: '#FEF9EF',
+            }
+          },
+          boxShadow: {
+            'clay': '0 12px 24px -6px rgba(0, 0, 0, 0.1), inset 0 -6px 0 rgba(0, 0, 0, 0.12), inset 0 6px 0 rgba(255, 255, 255, 0.6)',
+            'clay-btn': '0 8px 16px -2px rgba(0, 0, 0, 0.15), inset 0 -5px 0 rgba(0, 0, 0, 0.2), inset 0 4px 0 rgba(255, 255, 255, 0.5)',
+            'clay-pressed': 'inset 0 4px 8px rgba(0, 0, 0, 0.25)',
+            'clay-card': '0 20px 30px -10px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04), inset 0 -8px 0 rgba(0, 0, 0, 0.05), inset 0 8px 0 rgba(255, 255, 255, 0.8)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #E0F2FE 0%, #FEF3C7 50%, #FEE2E2 100%);
+      min-height: 100vh;
+      user-select: none;
+    }
+    h1, h2, h3, h4, .font-fun {
+      font-family: 'Fredoka', cursive;
+    }
+    /* Animasi Bouncy Pixar */
+    .bounce-hover {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .bounce-hover:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+    .bounce-hover:active {
+      transform: translateY(2px) scale(0.98);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+    /* Print Styling Khusus Lembar Nilai Guru */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        padding: 20px;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased relative">
+
+  <!-- Header Global -->
+  <header class="w-full bg-white/80 backdrop-blur-md border-b-4 border-amber-200 sticky top-0 z-40 px-4 py-3 shadow-sm">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="app.showHome()">
+        <!-- 3D Pixar Cross / Dove Icon SVG -->
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 to-amber-200 shadow-clay-btn flex items-center justify-center text-2xl border-2 border-white">
+          ✨
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold text-sky-700 leading-tight">Ujian BAB 1</h1>
+          <p class="text-xs sm:text-sm font-semibold text-amber-600">Pendidikan Agama Katolik & Budi Pekerti Kelas II</p>
+        </div>
+      </div>
+      
+      <!-- Navigasi Kanan / Profil -->
+      <div id="nav-actions" class="flex items-center gap-2">
+        <button id="btn-open-teacher" onclick="app.promptTeacherLogin()" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-clay-btn border-2 border-indigo-300 bounce-hover flex items-center gap-1.5">
+          <span>👨‍🏫 Mode Guru</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Konten Dinamis -->
+  <main id="app-container" class="max-w-5xl mx-auto px-4 py-6 md:py-8 min-h-[calc(100vh-140px)]">
+    <!-- View di-inject oleh JavaScript -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full text-center py-4 text-xs font-semibold text-slate-500">
+    © Ujian Online Interaktif Siswa Kelas 2 SD • Pendidikan Agama Katolik
+  </footer>
+
+  <!-- MODAL: Notifikasi Feedback Pop-up Jawaban Siswa (3D Pixar Style) -->
+  <div id="feedback-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden transition-all duration-300">
+    <div id="feedback-box" class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-clay-card border-4 border-white transform scale-90 transition-all duration-300">
+      <div id="feedback-icon" class="text-6xl mb-3 animate-bounce">👍</div>
+      <h3 id="feedback-title" class="text-2xl font-bold font-fun text-slate-800 mb-2">Hebat!</h3>
+      <p id="feedback-msg" class="text-base font-semibold text-slate-600 mb-6">Yeah, kamu menjawab dengan benar!</p>
+      <button onclick="app.closeFeedbackModal()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-bold rounded-2xl shadow-clay-btn border-2 border-amber-200 text-lg bounce-hover">
+        Lanjutkan Soal 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Modal Guru Login -->
+  <div id="teacher-login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-clay-card border-4 border-indigo-100 relative">
+      <button onclick="app.closeTeacherModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl">✕</button>
+      <div class="text-center mb-5">
+        <div class="w-16 h-16 mx-auto bg-gradient-to-tr from-indigo-500 to-indigo-300 rounded-3xl flex items-center justify-center text-3xl shadow-clay-btn text-white mb-2">
+          🔐
+        </div>
+        <h3 class="text-2xl font-bold text-indigo-900 font-fun">Akses Ruang Guru</h3>
+        <p class="text-xs text-slate-500 font-semibold">Masukkan sandi khusus untuk melihat daftar nilai (Canvasheet)</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kata Sandi Guru</label>
+          <input type="password" id="teacher-password-input" placeholder="Masukkan password..." class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-indigo-500 focus:outline-none font-semibold text-center text-lg tracking-wider transition">
+        </div>
+        
+        <div id="teacher-error-msg" class="hidden text-sm font-bold text-rose-500 bg-rose-50 border border-rose-200 p-2.5 rounded-xl text-center flex items-center justify-center gap-1">
+          <span>⚠️</span> Password anda salah!
+        </div>
+
+        <button onclick="app.verifyTeacherPassword()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base rounded-2xl shadow-clay-btn border-2 border-indigo-400 bounce-hover">
+          Masuk ke Ruang Guru 📋
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Konfirmasi Selesai Ujian -->
+  <div id="confirm-finish-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-clay-card border-4 border-amber-200">
+      <div class="text-5xl mb-3">🏁</div>
+      <h3 class="text-2xl font-bold text-slate-800 font-fun mb-2">Kumpulkan Ujian?</h3>
+      <p class="text-sm font-semibold text-slate-600 mb-6">Waktu masih tersisa! Yakin ingin menyelesaikan dan melihat nilaimu sekarang?</p>
+      <div class="flex gap-3">
+        <button onclick="app.closeConfirmModal()" class="flex-1 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl">
+          Periksa Lagi
+        </button>
+        <button onclick="app.finalizeExam()" class="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-clay-btn">
+          Ya, Selesai!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Detail Lembar Jawaban Siswa (Mode Guru) -->
+  <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl p-6 max-w-3xl w-full max-h-[90vh] flex flex-col shadow-clay-card border-4 border-indigo-200">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div>
+          <h3 id="detail-student-name" class="text-xl font-bold text-indigo-900 font-fun">Detail Jawaban Siswa</h3>
+          <p id="detail-student-meta" class="text-xs text-slate-500 font-semibold">Kelas 2A • Nilai: 100</p>
+        </div>
+        <button onclick="app.closeDetailModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center font-bold text-slate-600">✕</button>
+      </div>
+      
+      <div id="detail-answers-list" class="overflow-y-auto py-4 space-y-3 flex-1 pr-1">
+        <!-- Render detail soal & jawaban -->
+      </div>
+
+      <div class="pt-3 border-t border-slate-200 text-right">
+        <button onclick="app.closeDetailModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm">
+          Tutup Detail
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * DATABASE SOAL LENGKAP (40 NOMOR BERDASARKAN SILABUS MATERI BAB 1)
+     * Materi 1: Orangtuaku (1-10)
+     * Materi 2: Anggota Keluargaku (11-20)
+     * Materi 3: Bermain Bersama Teman (21-30)
+     * Materi 4: Bekerja Sama dengan Teman (31-40)
+     * Bobot soal: 2,5 per nomor. Nilai Maksimal = 100.
+     */
+    const RAW_QUESTIONS = [
+      // Materi 1
+      {
+        id: 1,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Orangtua disebut wakil Allah di dunia karena orangtua ...",
+        options: [
+          { text: "memiliki banyak uang", key: "a" },
+          { text: "merawat, menjaga, dan mendidik kita seperti Allah menyayangi kita", key: "b" },
+          { text: "selalu membelikan mainan", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 2,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Allah menitipkan kita kepada ...",
+        options: [
+          { text: "tetangga", key: "a" },
+          { text: "teman", key: "b" },
+          { text: "ayah dan ibu", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 3,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Nasihat orangtua lahir dari rasa ...",
+        options: [
+          { text: "sayang", key: "a" },
+          { text: "marah", key: "b" },
+          { text: "bosan", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 4,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Ibu berkata, \"Cuci tangan sebelum makan.\" Ibu berkata begitu supaya kita ...",
+        options: [
+          { text: "cepat kenyang", key: "a" },
+          { text: "tidak sakit", key: "b" },
+          { text: "boleh bermain", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 5,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Kitab Suci berkata, \"Hormatilah ayah dan ibumu.\" Kalimat ini adalah ...",
+        options: [
+          { text: "saran dari teman", key: "a" },
+          { text: "aturan permainan", key: "b" },
+          { text: "perintah Allah", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 6,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Contoh cara menghormati orangtua adalah ...",
+        options: [
+          { text: "mencium tangan saat berpamitan", key: "a" },
+          { text: "membentak ibu", key: "b" },
+          { text: "pergi tanpa pamit", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 7,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Yesus memberi teladan dengan hidup taat dalam asuhan ...",
+        options: [
+          { text: "Petrus dan Andreas", key: "a" },
+          { text: "Maria dan Yusuf", key: "b" },
+          { text: "Yohanes dan Yakobus", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 8,
+        sub: "Materi 1: Orangtuaku",
+        type: "pg",
+        question: "Dimas basah kuyup karena tidak membawa payung. Pesan dari cerita itu adalah ...",
+        options: [
+          { text: "hujan selalu turun di sore hari", key: "a" },
+          { text: "payung itu merepotkan", key: "b" },
+          { text: "nasihat orangtua menjaga kita dari bahaya", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 9,
+        sub: "Materi 1: Orangtuaku",
+        type: "isian",
+        question: "Orangtua disebut ………………… Allah di dunia.",
+        correct: "wakil"
+      },
+      {
+        id: 10,
+        sub: "Materi 1: Orangtuaku",
+        type: "isian",
+        question: "Ketika berpamitan dan pulang, kita ………………… tangan ayah dan ibu.",
+        correct: "mencium"
+      },
+
+      // Materi 2
+      {
+        id: 11,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Kita tidak memilih keluarga sendiri. Yang memberikan keluarga kepada kita adalah ...",
+        options: [
+          { text: "Allah", key: "a" },
+          { text: "teman", key: "b" },
+          { text: "tetangga", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 12,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Tugas ayah dalam keluarga adalah ...",
+        options: [
+          { text: "tidur sepanjang hari", key: "a" },
+          { text: "bekerja dan melindungi keluarga", key: "b" },
+          { text: "bermain terus", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 13,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Tugas ibu dalam keluarga adalah ...",
+        options: [
+          { text: "membiarkan anak sendirian", key: "a" },
+          { text: "marah-marah", key: "b" },
+          { text: "merawat dan mengajari anak berdoa", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 14,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Ada keluarga yang anggotanya banyak, ada yang sedikit. Semua keluarga itu ...",
+        options: [
+          { text: "kurang baik", key: "a" },
+          { text: "anugerah Allah yang patut disyukuri", key: "b" },
+          { text: "tidak perlu disyukuri", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 15,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Keluarga Kudus Nazaret adalah teladan keluarga yang saling mengasihi dan rajin ...",
+        options: [
+          { text: "berdoa", key: "a" },
+          { text: "bertengkar", key: "b" },
+          { text: "bermain saja", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 16,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Cara kita bersyukur atas anugerah keluarga adalah ...",
+        options: [
+          { text: "marah kepada orangtua", key: "a" },
+          { text: "tidak mau membantu di rumah", key: "b" },
+          { text: "berdoa dan berterima kasih kepada anggota keluarga", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 17,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Sikap yang baik kepada kakak dan adik adalah ...",
+        options: [
+          { text: "bertengkar", key: "a" },
+          { text: "rukun dan saling menyayangi", key: "b" },
+          { text: "tidak mau berbagi", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 18,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "pg",
+        question: "Kakek dan nenek menyayangi cucu, memberi nasihat, dan ...",
+        options: [
+          { text: "mendoakan keluarga", key: "a" },
+          { text: "memarahi cucu", key: "b" },
+          { text: "melarang cucu berdoa", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 19,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "isian",
+        question: "Keluarga adalah ………………… (pemberian) Allah yang sangat berharga.",
+        correct: "anugerah"
+      },
+      {
+        id: 20,
+        sub: "Materi 2: Anggota Keluargaku",
+        type: "isian",
+        question: "Anggota Keluarga Kudus Nazaret adalah Yosef, Maria, dan …………………",
+        correct: "yesus"
+      },
+
+      // Materi 3
+      {
+        id: 21,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Teman adalah anugerah dari ...",
+        options: [
+          { text: "tetangga", key: "a" },
+          { text: "Allah", key: "b" },
+          { text: "guru", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 22,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Salah satu manfaat bermain bersama teman adalah ...",
+        options: [
+          { text: "permainan menjadi lebih seru", key: "a" },
+          { text: "kita menjadi malas", key: "b" },
+          { text: "teman menjadi jauh", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 23,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Ketika teman jatuh saat bermain, sikap yang benar adalah ...",
+        options: [
+          { text: "menertawakannya", key: "a" },
+          { text: "meninggalkannya", key: "b" },
+          { text: "menolongnya berdiri", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 24,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Agar permainan berjalan rukun, kita harus ...",
+        options: [
+          { text: "bermain curang", key: "a" },
+          { text: "mau bergiliran", key: "b" },
+          { text: "merebut mainan", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 25,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Setelah selesai bermain, sikap yang baik adalah ...",
+        options: [
+          { text: "ikut merapikan mainan", key: "a" },
+          { text: "meninggalkan mainan berserakan", key: "b" },
+          { text: "pulang tanpa berpamitan", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 26,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Jika kita bersalah kepada teman, kita harus ...",
+        options: [
+          { text: "diam saja", key: "a" },
+          { text: "marah", key: "b" },
+          { text: "meminta maaf", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 27,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Ketika anak-anak dibawa kepada-Nya, Yesus ...",
+        options: [
+          { text: "menerima mereka dengan gembira dan memberkati mereka", key: "a" },
+          { text: "menyuruh mereka pergi", key: "b" },
+          { text: "tidak peduli kepada mereka", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 28,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "pg",
+        question: "Dengan bermain bersama teman, kita belajar ...",
+        options: [
+          { text: "berbuat curang", key: "a" },
+          { text: "berbagi, bergiliran, dan bersabar", key: "b" },
+          { text: "mengejek teman", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 29,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "isian",
+        question: "Allah memberi kita keluarga, guru, dan ………………… untuk belajar dan bermain.",
+        correct: "teman"
+      },
+      {
+        id: 30,
+        sub: "Materi 3: Bermain Bersama Teman",
+        type: "isian",
+        question: "Dito, Sari, Rina, dan Beni bermain ………………… tali di halaman sekolah.",
+        correct: "lompat"
+      },
+
+      // Materi 4
+      {
+        id: 31,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Bekerja sama artinya ...",
+        options: [
+          { text: "mengerjakan sesuatu sendirian", key: "a" },
+          { text: "menyuruh teman mengerjakan semuanya", key: "b" },
+          { text: "mengerjakan sesuatu bersama-sama untuk mencapai tujuan yang sama", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 32,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Salah satu manfaat bekerja sama adalah ...",
+        options: [
+          { text: "pekerjaan menjadi lebih ringan dan cepat selesai", key: "a" },
+          { text: "pekerjaan menjadi lebih lama", key: "b" },
+          { text: "teman menjadi marah", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 33,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Contoh bekerja sama dengan teman di sekolah adalah ...",
+        options: [
+          { text: "membiarkan teman membersihkan kelas sendirian", key: "a" },
+          { text: "piket membersihkan kelas bersama sesuai jadwal", key: "b" },
+          { text: "bermain sendiri saat teman piket", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 34,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Agar tetap rukun saat bekerja sama, kita harus ...",
+        options: [
+          { text: "memaksakan kehendak sendiri", key: "a" },
+          { text: "mengejek teman yang salah", key: "b" },
+          { text: "mau mendengarkan pendapat teman", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 35,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Setelah dapat bekerja sama dengan teman, kita sebaiknya ...",
+        options: [
+          { text: "mengucap syukur kepada Allah", key: "a" },
+          { text: "menyombongkan diri", key: "b" },
+          { text: "melupakan teman yang membantu", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 36,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Kitab Suci berkata, jika yang satu jatuh, yang lain dapat ...",
+        options: [
+          { text: "membiarkannya", key: "a" },
+          { text: "menolongnya berdiri", key: "b" },
+          { text: "menertawakannya", key: "c" }
+        ],
+        correct: "b"
+      },
+      {
+        id: 37,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Agar pembagian tugas adil, ...",
+        options: [
+          { text: "hanya satu orang yang bekerja", key: "a" },
+          { text: "ada yang hanya menonton", key: "b" },
+          { text: "semua mendapat bagian tugas", key: "c" }
+        ],
+        correct: "c"
+      },
+      {
+        id: 38,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "pg",
+        question: "Rafa tidak mau membantu saat piket. Sikap Dini yang baik adalah ...",
+        options: [
+          { text: "mengajak Rafa dengan ramah", key: "a" },
+          { text: "memarahi Rafa", key: "b" },
+          { text: "mengejek Rafa", key: "c" }
+        ],
+        correct: "a"
+      },
+      {
+        id: 39,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "isian",
+        question: "Bekerja sama membuat pekerjaan menjadi lebih ………………… dan cepat selesai.",
+        correct: "ringan"
+      },
+      {
+        id: 40,
+        sub: "Materi 4: Bekerja Sama dengan Teman",
+        type: "isian",
+        question: "Kita mengucapkan ………………… kepada teman yang telah membantu.",
+        correct: "terima kasih"
+      }
+    ];
+
+    /**
+     * Web Audio API Synthesizer Suara Animatif (Tanpa File Luar)
+     */
+    const SoundFx = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      playSuccess() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.15); // G5
+          osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3); // C6
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.4);
+        } catch(e) {}
+      },
+      playFail() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(180, now + 0.25);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } catch(e) {}
+      }
+    };
+
+    /**
+     * STATE MANAGEMENT APLIKASI
+     */
+    const app = {
+      currentView: 'home', // 'home' | 'exam' | 'result' | 'teacher'
+      teacherAuth: false,
+      
+      // Data Siswa yang sedang login
+      student: {
+        name: '',
+        kelas: '2A',
+        startTime: null,
+        timeRemaining: 3600, // 60 menit = 3600 detik
+        currentIndex: 0,
+        userAnswers: {}, // id: { userVal, isCorrect, isLocked }
+        questions: [] // Soal dengan urutan opsi yang diacak
+      },
+      
+      timerInterval: null,
+
+      init() {
+        // Cek jika ada riwayat siswa lokal yang tersimpan
+        this.render();
+      },
+
+      // Helper LocalStorage
+      getResultsFromStorage() {
+        const data = localStorage.getItem('pak_exam_scores');
+        return data ? JSON.parse(data) : [];
+      },
+
+      saveResultToStorage(result) {
+        const list = this.getResultsFromStorage();
+        list.unshift(result); // terbaru di atas
+        localStorage.setItem('pak_exam_scores', JSON.stringify(list));
+      },
+
+      deleteResult(index) {
+        const list = this.getResultsFromStorage();
+        list.splice(index, 1);
+        localStorage.setItem('pak_exam_scores', JSON.stringify(list));
+        this.renderTeacherDashboard();
+      },
+
+      clearAllResults() {
+        const customConfirm = document.createElement('div');
+        if (window.confirm("Apakah Bapak/Ibu guru yakin ingin mereset seluruh daftar nilai? Data tidak dapat dikembalikan.")) {
+          localStorage.removeItem('pak_exam_scores');
+          this.renderTeacherDashboard();
+        }
+      },
+
+      showHome() {
+        if (this.currentView === 'exam') {
+          if (!window.confirm("Ujian sedang berlangsung! Keluar ke beranda sekarang?")) return;
+          clearInterval(this.timerInterval);
+        }
+        this.currentView = 'home';
+        this.render();
+      },
+
+      promptTeacherLogin() {
+        if (this.teacherAuth) {
+          this.currentView = 'teacher';
+          this.render();
+          return;
+        }
+        document.getElementById('teacher-password-input').value = '';
+        document.getElementById('teacher-error-msg').classList.add('hidden');
+        document.getElementById('teacher-login-modal').classList.remove('hidden');
+      },
+
+      closeTeacherModal() {
+        document.getElementById('teacher-login-modal').classList.add('hidden');
+      },
+
+      verifyTeacherPassword() {
+        const pwd = document.getElementById('teacher-password-input').value.trim();
+        if (pwd === "Katolik29") {
+          this.teacherAuth = true;
+          this.closeTeacherModal();
+          this.currentView = 'teacher';
+          this.render();
+        } else {
+          const errBox = document.getElementById('teacher-error-msg');
+          errBox.classList.remove('hidden');
+          errBox.classList.add('animate-shake');
+          setTimeout(() => errBox.classList.remove('animate-shake'), 400);
+        }
+      },
+
+      logoutTeacher() {
+        this.teacherAuth = false;
+        this.currentView = 'home';
+        this.render();
+      },
+
+      logoutStudent() {
+        clearInterval(this.timerInterval);
+        this.student = {
+          name: '',
+          kelas: '2A',
+          startTime: null,
+          timeRemaining: 3600,
+          currentIndex: 0,
+          userAnswers: {},
+          questions: []
+        };
+        this.currentView = 'home';
+        this.render();
+      },
+
+      /**
+       * Memulai Ujian untuk Siswa
+       */
+      startExam() {
+        const nameInput = document.getElementById('student-name-input').value.trim();
+        const classSelect = document.getElementById('student-class-select').value;
+        const alertBox = document.getElementById('login-alert');
+
+        if (!nameInput) {
+          alertBox.innerText = "Hai adik manis, silakan tulis nama lengkapmu dulu ya! 😊";
+          alertBox.classList.remove('hidden');
+          return;
+        }
+        alertBox.classList.add('hidden');
+
+        // Acak opsi jawaban soal PG untuk tiap siswa
+        const preparedQuestions = RAW_QUESTIONS.map(q => {
+          if (q.type === 'pg') {
+            const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            return { ...q, options: shuffledOptions };
+          }
+          return { ...q };
+        });
+
+        this.student.name = nameInput;
+        this.student.kelas = classSelect;
+        this.student.questions = preparedQuestions;
+        this.student.currentIndex = 0;
+        this.student.userAnswers = {};
+        this.student.timeRemaining = 60 * 60; // 60 menit
+        this.student.startTime = new Date().toISOString();
+
+        this.currentView = 'exam';
+        this.startTimer();
+        this.render();
+      },
+
+      startTimer() {
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.timerInterval = setInterval(() => {
+          this.student.timeRemaining--;
+          const el = document.getElementById('exam-timer');
+          if (el) {
+            const min = Math.floor(this.student.timeRemaining / 60);
+            const sec = this.student.timeRemaining % 60;
+            el.innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+            if (this.student.timeRemaining < 300) {
+              el.classList.add('text-rose-600', 'animate-pulse');
+            }
+          }
+
+          if (this.student.timeRemaining <= 0) {
+            clearInterval(this.timerInterval);
+            this.finalizeExam();
+          }
+        }, 1000);
+      },
+
+      promptFinishExam() {
+        document.getElementById('confirm-finish-modal').classList.remove('hidden');
+      },
+
+      closeConfirmModal() {
+        document.getElementById('confirm-finish-modal').classList.add('hidden');
+      },
+
+      /**
+       * Menghitung nilai akhir dan menyimpan ke Canvasheet Guru
+       */
+      finalizeExam() {
+        this.closeConfirmModal();
+        clearInterval(this.timerInterval);
+
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        this.student.questions.forEach(q => {
+          const ans = this.student.userAnswers[q.id];
+          if (ans && ans.isCorrect) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        // 40 Soal x 2,5 = 100
+        const finalScore = Number((correctCount * 2.5).toFixed(1));
+
+        const examResult = {
+          id: Date.now(),
+          name: this.student.name,
+          kelas: this.student.kelas,
+          date: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
+          correct: correctCount,
+          wrong: wrongCount,
+          score: finalScore,
+          answers: { ...this.student.userAnswers }
+        };
+
+        // Simpan ke database guru
+        this.saveResultToStorage(examResult);
+
+        // Munculkan Confetti
+        try {
+          confetti({
+            particleCount: 120,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        } catch(e){}
+
+        this.lastResult = examResult;
+        this.currentView = 'result';
+        this.render();
+      },
+
+      /**
+       * Logika Jawaban Pilihan Ganda & Isian
+       */
+      handleAnswerPG(questionId, selectedKey) {
+        const q = this.student.questions.find(item => item.id === questionId);
+        if (!q) return;
+
+        const isCorrect = (selectedKey.toLowerCase() === q.correct.toLowerCase());
+        const isLocked = !isCorrect; // Kunci otomatis jika salah!
+
+        this.student.userAnswers[questionId] = {
+          userVal: selectedKey,
+          isCorrect: isCorrect,
+          isLocked: isLocked
+        };
+
+        this.showFeedback(isCorrect);
+        this.renderExamCard();
+      },
+
+      handleAnswerIsian(questionId) {
+        const inputEl = document.getElementById(`isian-input-${questionId}`);
+        if (!inputEl) return;
+        const val = inputEl.value.trim().toLowerCase();
+        if (!val) return;
+
+        const q = this.student.questions.find(item => item.id === questionId);
+        if (!q) return;
+
+        const isCorrect = (val === q.correct.toLowerCase());
+        const isLocked = !isCorrect; // Otomatis terkunci jika salah!
+
+        this.student.userAnswers[questionId] = {
+          userVal: val,
+          isCorrect: isCorrect,
+          isLocked: isLocked
+        };
+
+        this.showFeedback(isCorrect);
+        this.renderExamCard();
+      },
+
+      showFeedback(isCorrect) {
+        const modal = document.getElementById('feedback-modal');
+        const icon = document.getElementById('feedback-icon');
+        const title = document.getElementById('feedback-title');
+        const msg = document.getElementById('feedback-msg');
+
+        if (isCorrect) {
+          SoundFx.playSuccess();
+          icon.innerHTML = "👍✨";
+          title.className = "text-2xl font-bold font-fun text-emerald-600 mb-2";
+          title.innerText = "Luar Biasa!";
+          msg.innerText = "Yeah, kamu menjawab dengan benar! 👍✨";
+        } else {
+          SoundFx.playFail();
+          icon.innerHTML = "💪✨";
+          title.className = "text-2xl font-bold font-fun text-amber-600 mb-2";
+          title.innerText = "Tetap Semangat!";
+          msg.innerText = "Maaf, kamu belum berhasil, belajar lebih giat lagi ya! 💪✨ (Soal ini otomatis terkunci)";
+        }
+
+        modal.classList.remove('hidden');
+      },
+
+      closeFeedbackModal() {
+        document.getElementById('feedback-modal').classList.add('hidden');
+        // Auto maju ke nomor berikutnya jika belum selesai
+        if (this.student.currentIndex < 39) {
+          this.student.currentIndex++;
+          this.renderExamCard();
+        }
+      },
+
+      goToQuestion(idx) {
+        this.student.currentIndex = idx;
+        this.renderExamCard();
+      },
+
+      /**
+       * TAMPILAN KONTROL & RENDERER
+       */
+      render() {
+        const container = document.getElementById('app-container');
+        const navActions = document.getElementById('nav-actions');
+
+        // Navigasi Bar Kanan
+        if (this.currentView === 'exam') {
+          navActions.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="text-xs bg-sky-100 text-sky-800 font-bold px-3 py-1.5 rounded-full border border-sky-300">
+                ${this.student.name} (${this.student.kelas})
+              </span>
+              <button onclick="app.promptFinishExam()" class="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-bold shadow-clay-btn">
+                Selesai Ujian
+              </button>
+            </div>
+          `;
+        } else if (this.currentView === 'teacher') {
+          navActions.innerHTML = `
+            <button onclick="app.logoutTeacher()" class="px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-clay-btn border-2 border-rose-300 bounce-hover flex items-center gap-1">
+              🚪 Keluar Guru
+            </button>
+          `;
+        } else {
+          navActions.innerHTML = `
+            <button onclick="app.promptTeacherLogin()" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-clay-btn border-2 border-indigo-300 bounce-hover flex items-center gap-1.5">
+              <span>👨‍🏫 Mode Guru</span>
+            </button>
+          `;
+        }
+
+        // Switch View
+        if (this.currentView === 'home') {
+          container.innerHTML = this.renderHomeHTML();
+        } else if (this.currentView === 'exam') {
+          container.innerHTML = this.renderExamShellHTML();
+          this.renderExamCard();
+        } else if (this.currentView === 'result') {
+          container.innerHTML = this.renderResultHTML();
+        } else if (this.currentView === 'teacher') {
+          container.innerHTML = this.renderTeacherDashboardHTML();
+        }
+      },
+
+      renderHomeHTML() {
+        return `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-4">
+            <!-- Karakter 3D Pixar & Sambutan -->
+            <div class="lg:col-span-6 text-center lg:text-left space-y-4">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 font-bold text-xs shadow-inner">
+                <span>🌟</span> Semester I • Kelas II SD
+              </div>
+              <h2 class="text-3xl sm:text-5xl font-black text-slate-800 leading-tight font-fun">
+                Mari Uji Pemahaman <span class="text-sky-600">Iman Katolik</span> dengan Riang Gembira!
+              </h2>
+              <p class="text-slate-600 text-sm sm:text-base font-semibold">
+                Selamat datang anak-anak terkasih! Mari kita selesaikan 40 soal seru tentang Orangtua, Keluarga, Teman, dan Kerja Sama.
+              </p>
+
+              <!-- Ilustrasi Karakter 3D Pixar SVG -->
+              <div class="flex justify-center lg:justify-start items-center gap-4 py-3">
+                <div class="w-24 h-24 bg-gradient-to-tr from-sky-400 to-sky-200 rounded-3xl p-3 shadow-clay border-4 border-white flex flex-col items-center justify-center transform hover:rotate-3 transition">
+                  <span class="text-4xl">👦</span>
+                  <span class="text-[10px] font-bold text-sky-900 mt-1">Kelas 2A</span>
+                </div>
+                <div class="w-28 h-28 bg-gradient-to-tr from-amber-400 to-amber-200 rounded-3xl p-3 shadow-clay border-4 border-white flex flex-col items-center justify-center transform -rotate-3 hover:rotate-0 transition">
+                  <span class="text-5xl">👧</span>
+                  <span class="text-xs font-bold text-amber-900 mt-1">Kelas 2B</span>
+                </div>
+                <div class="w-24 h-24 bg-gradient-to-tr from-rose-400 to-rose-200 rounded-3xl p-3 shadow-clay border-4 border-white flex flex-col items-center justify-center transform hover:-rotate-3 transition">
+                  <span class="text-4xl">🕊️</span>
+                  <span class="text-[10px] font-bold text-rose-900 mt-1">Budi Pekerti</span>
+                </div>
+              </div>
+
+              <!-- List 4 Materi -->
+              <div class="grid grid-cols-2 gap-2 text-xs font-bold text-slate-600">
+                <div class="bg-white/80 p-2.5 rounded-2xl border border-sky-100 flex items-center gap-2 shadow-sm">
+                  <span class="text-base">1️⃣</span> Orangtuaku
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-2xl border border-amber-100 flex items-center gap-2 shadow-sm">
+                  <span class="text-base">2️⃣</span> Anggota Keluargaku
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-2xl border border-emerald-100 flex items-center gap-2 shadow-sm">
+                  <span class="text-base">3️⃣</span> Bermain Bersama Teman
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-2xl border border-indigo-100 flex items-center gap-2 shadow-sm">
+                  <span class="text-base">4️⃣</span> Bekerja Sama Teman
+                </div>
+              </div>
+            </div>
+
+            <!-- Kartu Login Siswa (Claymorphism Pixar) -->
+            <div class="lg:col-span-6 flex justify-center">
+              <div class="w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-clay-card border-4 border-white relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-200/50 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="text-center mb-6">
+                  <span class="inline-block p-3 rounded-2xl bg-sky-100 text-sky-600 text-3xl mb-2 shadow-inner">
+                    🎒
+                  </span>
+                  <h3 class="text-2xl font-bold font-fun text-slate-800">Masuk Mode Siswa</h3>
+                  <p class="text-xs font-semibold text-slate-500">Tuliskan identitasmu sebelum mulai ujian</p>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">
+                      Nama Lengkap Siswa
+                    </label>
+                    <input type="text" id="student-name-input" placeholder="Contoh: Maria Yosefa..." class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none font-semibold text-slate-800 transition shadow-inner">
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">
+                      Pilihan Kelas
+                    </label>
+                    <select id="student-class-select" class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none font-bold text-slate-700 transition bg-white">
+                      <option value="Kelas 2A">Kelas 2A</option>
+                      <option value="Kelas 2B">Kelas 2B</option>
+                    </select>
+                  </div>
+
+                  <div class="bg-amber-50 rounded-2xl p-3 border border-amber-200 text-xs font-semibold text-amber-800 space-y-1">
+                    <p class="flex items-center gap-1.5 font-bold">⏱️ Waktu Pengerjaan: 60 Menit</p>
+                    <p>• 40 Soal (Pilihan Ganda & Isian)</p>
+                    <p>• Jika salah, soal langsung terkunci ya!</p>
+                  </div>
+
+                  <div id="login-alert" class="hidden text-xs font-bold text-rose-500 bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-center"></div>
+
+                  <button onclick="app.startExam()" class="w-full py-4 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-extrabold text-lg rounded-2xl shadow-clay-btn border-2 border-sky-300 bounce-hover flex items-center justify-center gap-2">
+                    <span>Mulai Ujian Sekarang</span>
+                    <span>🚀</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      },
+
+      renderExamShellHTML() {
+        return `
+          <div class="space-y-4">
+            <!-- Header Ujian: Info Siswa & Timer -->
+            <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-clay border-2 border-white flex flex-wrap items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl shadow-inner border border-sky-200">
+                  🧒
+                </div>
+                <div>
+                  <h4 class="font-bold text-base text-slate-800 leading-tight">${this.student.name}</h4>
+                  <span class="inline-block text-xs font-extrabold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-lg border border-sky-200">
+                    ${this.student.kelas}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Timer 3D Pixar Badge -->
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 bg-amber-50 border-2 border-amber-300 px-4 py-2 rounded-2xl shadow-clay-btn">
+                  <span class="text-xl">⏳</span>
+                  <div>
+                    <div class="text-[10px] uppercase font-bold text-amber-700">Sisa Waktu</div>
+                    <div id="exam-timer" class="font-fun text-xl sm:text-2xl font-bold text-amber-900 tracking-wider">60:00</div>
+                  </div>
+                </div>
+
+                <button onclick="app.promptFinishExam()" class="px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-clay-btn border-2 border-emerald-300 bounce-hover">
+                  Kumpulkan 🏁
+                </button>
+              </div>
+            </div>
+
+            <!-- Grid Navigasi Nomor Soal (1 - 40) -->
+            <div class="bg-white/90 backdrop-blur rounded-3xl p-3 sm:p-4 shadow-sm border border-slate-200">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-600">Peta Soal (1 - 40):</span>
+                <span class="text-xs font-bold text-slate-500">Klik nomor untuk melompat ke soal</span>
+              </div>
+              <div class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-20 gap-1.5" id="nav-badge-grid">
+                ${this.renderQuestionBadges()}
+              </div>
+            </div>
+
+            <!-- Kontainer Kartu Soal Utama -->
+            <div id="question-card-container">
+              <!-- Render via renderExamCard() -->
+            </div>
+          </div>
+        `;
+      },
+
+      renderQuestionBadges() {
+        return this.student.questions.map((q, idx) => {
+          const ans = this.student.userAnswers[q.id];
+          const isCurrent = this.student.currentIndex === idx;
+          let colorClass = "bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200";
+
+          if (ans) {
+            if (ans.isCorrect) {
+              colorClass = "bg-emerald-500 text-white border-emerald-600 shadow-sm";
+            } else {
+              colorClass = "bg-rose-500 text-white border-rose-600 shadow-sm";
+            }
+          }
+
+          if (isCurrent) {
+            colorClass += " ring-4 ring-sky-400 font-black scale-105 z-10";
+          }
+
+          return `
+            <button onclick="app.goToQuestion(${idx})" class="h-9 w-full rounded-xl text-xs font-bold transition flex items-center justify-center border ${colorClass}">
+              ${idx + 1}
+            </button>
+          `;
+        }).join('');
+      },
+
+      renderExamCard() {
+        const cardContainer = document.getElementById('question-card-container');
+        const badgeGrid = document.getElementById('nav-badge-grid');
+        if (badgeGrid) badgeGrid.innerHTML = this.renderQuestionBadges();
+        if (!cardContainer) return;
+
+        const idx = this.student.currentIndex;
+        const q = this.student.questions[idx];
+        const ans = this.student.userAnswers[q.id];
+        const isLocked = ans ? ans.isLocked : false;
+
+        let contentHTML = '';
+
+        if (q.type === 'pg') {
+          contentHTML = `
+            <div class="space-y-3 pt-4">
+              ${q.options.map((opt) => {
+                const isSelected = ans && ans.userVal.toLowerCase() === opt.key.toLowerCase();
+                let optClass = "bg-white hover:bg-amber-50 border-2 border-slate-200 hover:border-amber-400 text-slate-800";
+                
+                if (isSelected) {
+                  if (ans.isCorrect) {
+                    optClass = "bg-emerald-100 border-2 border-emerald-500 text-emerald-900 shadow-inner";
+                  } else {
+                    optClass = "bg-rose-100 border-2 border-rose-500 text-rose-900 shadow-inner";
+                  }
+                }
+
+                const disabledAttr = (ans && ans.isCorrect) || isLocked ? 'disabled' : '';
+
+                return `
+                  <button ${disabledAttr} onclick="app.handleAnswerPG(${q.id}, '${opt.key}')" class="w-full text-left p-4 rounded-2xl ${optClass} font-semibold transition flex items-start gap-3 bounce-hover shadow-sm disabled:cursor-not-allowed">
+                    <span class="w-8 h-8 rounded-xl bg-amber-200/60 font-bold flex items-center justify-center text-amber-900 shrink-0 uppercase text-sm">
+                      ${opt.key}
+                    </span>
+                    <span class="pt-0.5 text-sm sm:text-base leading-relaxed">${opt.text}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          `;
+        } else {
+          // Soal Isian
+          const currentVal = ans ? ans.userVal : '';
+          const disabledAttr = (ans && ans.isCorrect) || isLocked ? 'disabled' : '';
+
+          contentHTML = `
+            <div class="pt-6 space-y-4 max-w-lg">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Tulis Jawaban Isian:</label>
+                <input type="text" id="isian-input-${q.id}" value="${currentVal}" ${disabledAttr} placeholder="Ketik jawabanmu di sini..." class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-amber-500 focus:outline-none font-bold text-base text-slate-800 disabled:bg-slate-100 disabled:text-slate-500">
+              </div>
+
+              ${!isLocked && !(ans && ans.isCorrect) ? `
+                <button onclick="app.handleAnswerIsian(${q.id})" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl shadow-clay-btn border-2 border-amber-300 bounce-hover text-sm">
+                  Kirim Jawaban Isian ✨
+                </button>
+              ` : ''}
+            </div>
+          `;
+        }
+
+        // Status Card
+        let statusNotice = '';
+        if (ans) {
+          if (ans.isCorrect) {
+            statusNotice = `
+              <div class="mt-4 p-3 bg-emerald-100 border border-emerald-300 rounded-2xl text-emerald-800 text-xs sm:text-sm font-bold flex items-center gap-2">
+                <span>✅</span> Jawabanmu benar! Pertahankan ya!
+              </div>
+            `;
+          } else if (isLocked) {
+            statusNotice = `
+              <div class="mt-4 p-3 bg-rose-100 border border-rose-300 rounded-2xl text-rose-800 text-xs sm:text-sm font-bold flex items-center gap-2">
+                <span>🔒</span> Jawaban salah dan soal otomatis terkunci. Lanjut ke soal berikutnya!
+              </div>
+            `;
+          }
+        }
+
+        cardContainer.innerHTML = `
+          <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-clay-card border-4 border-white transition duration-300 relative">
+            <!-- Subbab Header -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                📖 ${q.sub}
+              </span>
+              <span class="text-xs font-bold text-slate-400">
+                Soal ${idx + 1} dari 40
+              </span>
+            </div>
+
+            <!-- Teks Soal -->
+            <div class="text-base sm:text-xl font-bold text-slate-800 leading-relaxed font-fun">
+              ${idx + 1}. ${q.question}
+            </div>
+
+            ${contentHTML}
+            ${statusNotice}
+
+            <!-- Tombol Navigasi Bawah -->
+            <div class="flex items-center justify-between pt-8 border-t border-slate-100 mt-6">
+              <button onclick="app.goToQuestion(${Math.max(0, idx - 1)})" ${idx === 0 ? 'disabled' : ''} class="px-5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                ⬅️ Sebelumnya
+              </button>
+
+              <span class="text-xs font-bold text-slate-500">
+                Tipe: <b class="uppercase text-sky-700">${q.type === 'pg' ? 'Pilihan Ganda' : 'Isian Singkat'}</b>
+              </span>
+
+              ${idx < 39 ? `
+                <button onclick="app.goToQuestion(${idx + 1})" class="px-5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm bg-sky-500 hover:bg-sky-600 text-white shadow-clay-btn border-2 border-sky-300 transition">
+                  Berikutnya ➡️
+                </button>
+              ` : `
+                <button onclick="app.promptFinishExam()" class="px-5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm bg-emerald-500 hover:bg-emerald-600 text-white shadow-clay-btn border-2 border-emerald-300 transition">
+                  Selesai 🏁
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      },
+
+      renderResultHTML() {
+        const res = this.lastResult;
+        const passed = res.score >= 70;
+
+        return `
+          <div class="max-w-xl mx-auto py-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 text-center shadow-clay-card border-4 border-white relative overflow-hidden">
+              <div class="text-6xl mb-3 animate-bounce">
+                ${passed ? '🎉' : '🌱'}
+              </div>
+
+              <h3 class="text-2xl sm:text-3xl font-black font-fun text-slate-800 mb-1">
+                ${passed ? 'Luar Biasa, Kamu Berhasil!' : 'Tetap Semangat Belajar Ya!'}
+              </h3>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500 mb-6">
+                Rapor Hasil Ujian BAB 1 Pendidikan Agama Katolik
+              </p>
+
+              <!-- Kartu Nilai 3D Pixar -->
+              <div class="bg-gradient-to-tr ${passed ? 'from-amber-400 to-amber-200 text-amber-950' : 'from-sky-400 to-sky-200 text-sky-950'} rounded-3xl p-6 shadow-clay-btn border-4 border-white mb-6">
+                <div class="text-xs uppercase font-extrabold tracking-wider opacity-80">Nilai Akhir Siswa</div>
+                <div class="text-6xl sm:text-7xl font-fun font-black my-2">${res.score}</div>
+                <div class="text-xs font-bold">Skala Penilaian: 0 - 100 (Bobot 2,5 / Soal)</div>
+              </div>
+
+              <!-- Statistik Jawaban -->
+              <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4">
+                  <div class="text-3xl font-fun font-bold text-emerald-600">${res.correct}</div>
+                  <div class="text-xs font-bold text-emerald-800">Jawaban Benar ✅</div>
+                </div>
+                <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4">
+                  <div class="text-3xl font-fun font-bold text-rose-600">${res.wrong}</div>
+                  <div class="text-xs font-bold text-rose-800">Jawaban Salah / Lewat ❌</div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 rounded-2xl p-4 text-xs font-semibold text-slate-600 mb-6 text-left border border-slate-200">
+                <p>👤 <b>Nama Siswa:</b> ${res.name}</p>
+                <p>🏫 <b>Rombel / Kelas:</b> ${res.kelas}</p>
+                <p>📅 <b>Waktu Selesai:</b> ${res.date}</p>
+                <p class="text-indigo-600 font-bold mt-1">✨ Nilaimu sudah otomatis terkirim ke buku nilai Bapak/Ibu guru!</p>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="app.logoutStudent()" class="flex-1 py-3.5 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-2xl shadow-clay-btn border-2 border-sky-300 bounce-hover text-sm">
+                  Keluar / Siswa Baru 🔄
+                </button>
+                <button onclick="app.promptTeacherLogin()" class="flex-1 py-3.5 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-2xl shadow-clay-btn border-2 border-indigo-300 bounce-hover text-sm">
+                  Buka Ruang Guru 📋
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      },
+
+      /**
+       * TAMPILAN MODE GURU (CANVASHEET, DAFTAR NILAI, CETAK & DETAIL)
+       */
+      renderTeacherDashboardHTML() {
+        const results = this.getResultsFromStorage();
+
+        return `
+          <div class="space-y-6">
+            <!-- Header Guru -->
+            <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-3xl p-6 text-white shadow-clay border-4 border-indigo-400/50 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-3xl">👨‍🏫</span>
+                  <h2 class="text-2xl sm:text-3xl font-bold font-fun">Dashboard Rekapitulasi Nilai Guru</h2>
+                </div>
+                <p class="text-xs sm:text-sm text-indigo-200 font-medium mt-1">
+                  Canvasheet Terkoneksi Langsung dengan Pengerjaan Siswa Kelas 2A & 2B
+                </p>
+              </div>
+
+              <!-- Tombol Aksi Guru -->
+              <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="px-4 py-2.5 bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold rounded-2xl text-xs sm:text-sm shadow-clay-btn border-2 border-amber-200 bounce-hover flex items-center gap-1.5">
+                  <span>🖨️</span> Cetak Lembar Nilai
+                </button>
+                <button onclick="app.clearAllResults()" class="px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-clay-btn border-2 border-rose-300 bounce-hover flex items-center gap-1.5">
+                  <span>🗑️</span> Reset Data
+                </button>
+              </div>
+            </div>
+
+            <!-- Ringkasan Kartu Nilai (Summary KPI) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-xs font-bold text-slate-500 uppercase">Total Peserta</div>
+                <div class="text-3xl font-fun font-bold text-indigo-600 mt-1">${results.length}</div>
+              </div>
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-xs font-bold text-slate-500 uppercase">Rata-rata Nilai</div>
+                <div class="text-3xl font-fun font-bold text-amber-600 mt-1">
+                  ${results.length ? (results.reduce((a, b) => a + b.score, 0) / results.length).toFixed(1) : '0'}
+                </div>
+              </div>
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-xs font-bold text-slate-500 uppercase">Nilai Tertinggi</div>
+                <div class="text-3xl font-fun font-bold text-emerald-600 mt-1">
+                  ${results.length ? Math.max(...results.map(r => r.score)) : '0'}
+                </div>
+              </div>
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-center">
+                <div class="text-xs font-bold text-slate-500 uppercase">Tuntas (≥ 70)</div>
+                <div class="text-3xl font-fun font-bold text-sky-600 mt-1">
+                  ${results.filter(r => r.score >= 70).length}
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabel Daftar Nilai (Canvasheet) Khusus Cetak & Tampilan -->
+            <div id="print-area" class="bg-white rounded-3xl p-6 shadow-clay-card border-4 border-white">
+              <!-- Judul Khusus Cetak -->
+              <div class="hidden print:block text-center border-b-2 border-slate-800 pb-4 mb-4">
+                <h2 class="text-2xl font-bold uppercase">Daftar Nilai Siswa - Ujian BAB 1</h2>
+                <h3 class="text-lg">Pendidikan Agama Katolik & Budi Pekerti - Kelas II SD</h3>
+                <p class="text-xs">Materi: Orangtuaku, Anggota Keluargaku, Bermain Bersama Teman, Bekerja Sama dengan Teman</p>
+              </div>
+
+              <div class="flex items-center justify-between pb-4 mb-2">
+                <h3 class="text-lg font-bold font-fun text-slate-800">Tabel Daftar Nilai Siswa (Canvasheet)</h3>
+                <span class="text-xs font-semibold text-slate-500">Tersinkronisasi otomatis via Local Data</span>
+              </div>
+
+              ${results.length === 0 ? `
+                <div class="py-12 text-center text-slate-400 font-semibold">
+                  <div class="text-5xl mb-2">📝</div>
+                  Belum ada siswa yang menyelesaikan ujian. Data akan muncul otomatis setelah siswa mengumpulkan jawaban.
+                </div>
+              ` : `
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                      <tr class="bg-indigo-50/80 text-indigo-900 border-b-2 border-indigo-200">
+                        <th class="p-3 font-bold rounded-l-xl">No.</th>
+                        <th class="p-3 font-bold">Waktu Masuk</th>
+                        <th class="p-3 font-bold">Nama Lengkap Siswa</th>
+                        <th class="p-3 font-bold">Kelas</th>
+                        <th class="p-3 font-bold text-center">Benar</th>
+                        <th class="p-3 font-bold text-center">Salah</th>
+                        <th class="p-3 font-bold text-center">Nilai Akhir</th>
+                        <th class="p-3 font-bold text-center">Status</th>
+                        <th class="p-3 font-bold text-center no-print rounded-r-xl">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                      ${results.map((res, index) => `
+                        <tr class="hover:bg-slate-50/70 transition">
+                          <td class="p-3 font-bold text-slate-600">${index + 1}</td>
+                          <td class="p-3 text-slate-500">${res.date}</td>
+                          <td class="p-3 font-bold text-slate-800">${res.name}</td>
+                          <td class="p-3 font-semibold text-indigo-700">${res.kelas}</td>
+                          <td class="p-3 font-bold text-center text-emerald-600">${res.correct}</td>
+                          <td class="p-3 font-bold text-center text-rose-500">${res.wrong}</td>
+                          <td class="p-3 font-black text-center font-fun text-base ${res.score >= 70 ? 'text-emerald-700' : 'text-amber-700'}">
+                            ${res.score}
+                          </td>
+                          <td class="p-3 text-center">
+                            <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-bold ${res.score >= 70 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                              ${res.score >= 70 ? 'Tuntas' : 'Perlu Bimbingan'}
+                            </span>
+                          </td>
+                          <td class="p-3 text-center no-print">
+                            <div class="flex items-center justify-center gap-1.5">
+                              <button onclick="app.showDetailModal(${index})" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-lg border border-indigo-200 text-xs">
+                                🔍 Detail
+                              </button>
+                              <button onclick="app.deleteResult(${index})" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold rounded-lg border border-rose-200 text-xs" title="Hapus Data Siswa">
+                                🗑️
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      },
+
+      renderTeacherDashboard() {
+        this.render();
+      },
+
+      /**
+       * MODAL DETAIL JAWABAN SISWA
+       */
+      showDetailModal(resultIndex) {
+        const results = this.getResultsFromStorage();
+        const res = results[resultIndex];
+        if (!res) return;
+
+        document.getElementById('detail-student-name').innerText = `Detail Jawaban: ${res.name}`;
+        document.getElementById('detail-student-meta').innerText = `${res.kelas} • Benar: ${res.correct} • Salah: ${res.wrong} • Nilai Akhir: ${res.score}`;
+
+        const answersListEl = document.getElementById('detail-answers-list');
+        answersListEl.innerHTML = RAW_QUESTIONS.map((q, idx) => {
+          const userAns = res.answers ? res.answers[q.id] : null;
+          const userVal = userAns ? userAns.userVal : '(Tidak dijawab)';
+          const isCorrect = userAns ? userAns.isCorrect : false;
+
+          return `
+            <div class="p-3.5 rounded-2xl border ${isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'} text-xs">
+              <div class="flex items-center justify-between font-bold mb-1">
+                <span class="text-slate-800">No. ${idx + 1} (${q.sub})</span>
+                <span class="${isCorrect ? 'text-emerald-700' : 'text-rose-600'} font-extrabold">
+                  ${isCorrect ? 'BENAR (+2.5)' : 'SALAH (0)'}
+                </span>
+              </div>
+              <p class="text-slate-700 font-medium mb-1.5">${q.question}</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px]">
+                <div class="text-slate-600">
+                  Jawaban Siswa: <b class="${isCorrect ? 'text-emerald-800' : 'text-rose-700'}">${userVal}</b>
+                </div>
+                <div class="text-slate-600">
+                  Kunci Jawaban: <b class="text-indigo-800 font-bold">${q.correct}</b>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById('detail-modal').classList.remove('hidden');
+      },
+
+      closeDetailModal() {
+        document.getElementById('detail-modal').classList.add('hidden');
+      }
+    };
+
+    // Jalankan aplikasi saat jendela siap
+    window.onload = function() {
+      app.init();
+    };
+  </script>
+</body>
+</html>
